@@ -17,16 +17,16 @@ import javax.imageio.ImageIO;
 
 
 
-public class Player {
+public abstract class Player {
 
-	private Weapon weapon;
-	private int level, health, experience;
+	protected Weapon weapon;
+	protected int level, health, experience;
 	public static int x, y;
-	private double playerSpeed;
-	private BufferedImage playerImgN1, playerImgN2, playerImgE1, playerImgE2, playerImgW1, playerImgW2, playerImgS1, playerImgS2, displayedImage;
-	private float stamina;
+	protected double playerSpeed;
+	protected BufferedImage playerImgN1, playerImgN2, playerImgE1, playerImgE2, playerImgW1, playerImgW2, playerImgS1, playerImgS2, displayedImage;
+	protected float stamina;
 	public static Face face;
-	private static int playerSize;
+	protected static int playerSize;
 	private static int lastActionHelper;
 	private CurrentTiles currentTiles_;
 	private EventHandler eventHandler_;
@@ -34,13 +34,11 @@ public class Player {
 	private boolean isMoving;
 	private int changeFrame;
 	private boolean faceChange;
-	private Face lastFace;
 	/** The time since the last frame change took place */
 	private long lastFrameChange;
 	/** The frame duration in milliseconds, i.e. how long any given frame of animation lasts */
-	private long frameDuration = 10;
-	private Random generator;
-
+	protected long frameDuration;
+	protected Random generator;
 	public enum Face {
 		NORTH,
 		EAST,
@@ -54,40 +52,9 @@ public class Player {
 	}
 
 
-	public void createNewPlayer() {
-		weapon = new Weapon();
-		x = (Framework.frameWidth / 2) + 35;
-		while (x % 64 != 0)
-			x--;
-		y = (Framework.frameHeight / 2) - 70;
-		while (y % 64 != 0)
-			y--;
-		level = 1;
-		health = 150;
-		experience = 0;
-		playerSize = 50;
-		stamina = 150;
-		playerSpeed = (level / 5 ) + 4;
-		face = Face.EAST;
-		generator = new Random();
+	public void createNewPlayer(){};
 
-	}
-
-	public void loadImages() {
-		try {
-			playerImgW1 = ImageIO.read(new File("playerW1.png"));
-			playerImgW2 = ImageIO.read(new File("playerW2.png"));
-			playerImgN1 = ImageIO.read(new File("playerN1.png"));
-			playerImgN2 = ImageIO.read(new File("playerN2.png"));
-			playerImgE1 = ImageIO.read(new File("playerE1.png"));
-			playerImgE2 = ImageIO.read(new File("playerE2.png"));
-			playerImgS1 = ImageIO.read(new File("playerS1.png"));
-			playerImgS2 = ImageIO.read(new File("playerS2.png"));
-		}
-		catch (IOException ex) {
-			Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
-		}
-	}
+	public void loadImages(){};
 
 	public boolean hasShot(long gameTime)
 	{
@@ -100,10 +67,8 @@ public class Player {
 			return false;
 	}
 
-
-	public void draw(Graphics2D g2d) {
+	public void doShit(){
 		if(isMoving == true)
-			System.out.println(("true"));
 		switch (face) {
 
 		case SOUTH:
@@ -234,6 +199,9 @@ public class Player {
 
 
 		}
+	}
+	public void draw(Graphics2D g2d) {
+		doShit();
 		g2d.drawImage(displayedImage, x, y, null);
 		g2d.drawString("Ammo: " + weapon.getCurrentAmmo(), 5, 15);
 	}
@@ -413,7 +381,6 @@ public class Player {
 		if(!Canvas.keyboardKeyState(KeyEvent.VK_A) && !Canvas.keyboardKeyState(KeyEvent.VK_S) && !Canvas.keyboardKeyState(KeyEvent.VK_D) && !Canvas.keyboardKeyState(KeyEvent.VK_W)){
 			isMoving = false;
 				faceChange = true;
-			lastFace = face;
 		}
 
 		}

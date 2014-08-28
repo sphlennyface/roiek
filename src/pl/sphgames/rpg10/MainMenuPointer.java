@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
+import pl.sphgames.rpg10.Game.CHARACTER;
+
 
 public class MainMenuPointer {
 	private int x_, y_;
@@ -55,7 +57,7 @@ public class MainMenuPointer {
 	}
 	
 	private boolean isPossibleDown() {
-		if (y_ < 340)
+		if (y_ < 390)
 			return true;
 		return false;
 	}
@@ -64,13 +66,19 @@ public class MainMenuPointer {
 		switch (y) {
 		case 200:
 			selected = SELECTION.NEWGAME;
+			Game.charChosen = CHARACTER.GANDALF;
 		break;
 		
 		case 270:
-			selected = SELECTION.RANDOM;
+			selected = SELECTION.NEWGAME;
+			Game.charChosen = CHARACTER.LEGOLAS;
 		break;
 		
 		case 340:
+			selected = SELECTION.RANDOM;
+		break;
+		
+		case 410:
 			selected = SELECTION.EXIT;
 		break;
 		default:

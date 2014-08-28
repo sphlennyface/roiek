@@ -43,9 +43,10 @@ public class MainMenu {
 		g2d.drawImage(bg, 0, 0, null);
 		g2d.setColor(Color.white);
 		g2d.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		g2d.drawString("NEW GAME", 400, 250);
-		g2d.drawString("SURVIVAL", 400, 320);
-		g2d.drawString("QUIT", 400, 390);
+		g2d.drawString("NEW GAME as GANDALF", 400, 250);
+		g2d.drawString("NEW GAME as LEGOLAS", 400, 320);
+		g2d.drawString("SURVIVAL", 400, 390);
+		g2d.drawString("QUIT", 400, 460);
 		pointer.Draw(g2d);
 		
 	}

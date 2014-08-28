@@ -27,6 +27,8 @@ import javax.imageio.ImageIO;
 		private BufferedImage holder;
 		public ObjectHandler objectHandler;
 		private Crosshair crosshair;
+		public enum CHARACTER {LEGOLAS, GANDALF};
+		public static CHARACTER charChosen;
 
 	    public Game()
 	    {
@@ -48,8 +50,11 @@ import javax.imageio.ImageIO;
 	
 	    private void Initialize()
 	    {
-	    	player = new Player();
-	    	weapon = new Weapon();
+	    	if(Game.charChosen == CHARACTER.LEGOLAS)
+	    		player = new Legolas();
+	    	else
+	    		player = new Gandalf();
+	    	weapon = player.weapon;
 	    	crosshair = new Crosshair();
 	    	
 	    	objectHandler = new ObjectHandler();

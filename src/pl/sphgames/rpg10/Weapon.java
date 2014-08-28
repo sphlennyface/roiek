@@ -15,7 +15,7 @@ public class Weapon {
 	public Weapon() {
 		name = "Glock";
 		damage = 30;
-		magCapacity = 20;
+		magCapacity = 2000;
 		firingSpeed = 1;
 		reloadTime = 3;
 		mags = 3;
